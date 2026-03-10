@@ -1,0 +1,923 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quy trình T&C 6 Cấp Độ - Nam Hoàng Controls</title>
+    <!-- Tích hợp Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Tích hợp FontAwesome cho Icon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* Đồng bộ màu sắc từ Logo Nam Hoàng Controls */
+        :root {
+            --brand-navy: #2B4461;    /* Màu chữ và cột đậm */
+            --brand-gold: #D69E2E;    /* Màu cột vàng */
+            --brand-teal: #498A94;    /* Màu cột xanh cổ vịt */
+            --brand-cyan: #5BE4C5;    /* Màu cột xanh sáng */
+            --bg-light: #F4F7F9;
+            --text-dark: #222222;     /* Làm chữ tối màu thêm để hiển thị sắc nét trên máy chiếu */
+            --text-gray: #444444;     /* Đậm màu xám lên để tăng độ tương phản */
+            --white: #FFFFFF;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 18px; /* Tăng kích thước chữ cơ bản lên 18px cho trình chiếu */
+            line-height: 1.7; /* Tăng khoảng cách dòng giúp dễ đọc hơn trên màn hình lớn */
+            color: var(--text-dark);
+            background-color: var(--bg-light);
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Top Navigation / Branding */
+        .top-bar {
+            background-color: var(--white);
+            padding: 15px 5%;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        /* CSS Logo Styles */
+        .logo-container {
+            display: flex;
+            align-items: center;
+        }
+        .css-logo {
+            display: flex;
+            align-items: flex-end;
+            height: 40px; /* Chiều cao tổng thể của logo */
+            gap: 5px; /* Khoảng cách giữa các thanh */
+            margin-right: 20px; /* Khoảng cách với tên công ty */
+        }
+        .css-logo-bar {
+            width: 9px; /* Chiều rộng mỗi thanh */
+            border-radius: 2px; /* Bo góc nhẹ */
+        }
+        /* Đặt chiều cao và màu sắc cho từng thanh dựa trên hình ảnh */
+        .bar-1 { height: 40%; background-color: var(--brand-cyan); }
+        .bar-2 { height: 60%; background-color: var(--brand-teal); }
+        .bar-3 { height: 80%; background-color: var(--brand-navy); }
+        .bar-4 { height: 100%; background-color: var(--brand-gold); }
+        .bar-5 { height: 70%; background-color: var(--brand-navy); }
+
+        .brand-text {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .brand-text h1 {
+            margin: 0;
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: var(--brand-navy);
+            line-height: 1.2;
+            letter-spacing: -0.5px;
+        }
+        .brand-text p {
+            margin: 0;
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--text-gray);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        /* Hero Banner */
+        .hero {
+            background: linear-gradient(135deg, var(--brand-navy) 0%, #1a2a3d 100%);
+            color: var(--white);
+            padding: 4rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -20px;
+            left: 0;
+            width: 100%;
+            height: 40px;
+            background: var(--bg-light);
+            transform: skewY(-1.5deg);
+        }
+
+        .hero h1 {
+            font-size: 3.2rem; /* Phóng to tiêu đề chính */
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.5px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3); /* Thêm đổ bóng để chữ nổi bật trên nền */
+        }
+
+        .hero h1 span {
+            color: var(--brand-gold);
+            display: block; /* Tách dòng cho đẹp trên màn hình lớn */
+            margin-top: 10px;
+        }
+
+        .hero p {
+            font-size: 1.35rem; /* Phóng to đoạn mô tả */
+            max-width: 900px; /* Mở rộng khung chứa text */
+            margin: 0 auto;
+            color: #e2edf8; /* Sáng màu chữ lên chút để tương phản tốt hơn trên nền tối */
+            font-weight: 500;
+        }
+
+        /* Layout Container */
+        .container {
+            max-width: 1400px; /* Mở rộng container để tận dụng màn hình chiếu rộng */
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        /* Distinction Section Styles */
+        .distinction-section {
+            padding: 4rem 0;
+            background-color: var(--white);
+            border-bottom: 1px solid rgba(0,0,0,0.08);
+        }
+        .distinction-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+        .distinction-card {
+            background: var(--bg-light);
+            padding: 2.5rem;
+            border-radius: 12px;
+            border-left: 6px solid;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.03);
+        }
+        .testing-card { border-color: var(--brand-teal); }
+        .commissioning-card { border-color: var(--brand-gold); }
+
+        .distinction-header-box {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        .distinction-icon {
+            font-size: 2.5rem;
+            margin-right: 1.5rem;
+        }
+        .testing-icon { color: var(--brand-teal); }
+        .commissioning-icon { color: var(--brand-gold); }
+
+        .distinction-card h3 {
+            margin: 0;
+            font-size: 1.8rem;
+            color: var(--brand-navy);
+            font-weight: 800;
+        }
+        .distinction-card p {
+            font-size: 1.2rem;
+            color: var(--text-dark);
+            font-weight: 500;
+            margin-bottom: 1.5rem;
+        }
+        .distinction-card ul {
+            margin: 0;
+            padding-left: 1.5rem;
+            color: var(--text-gray);
+        }
+        .distinction-card ul li {
+            margin-bottom: 12px;
+            font-size: 1.1rem;
+        }
+        @media (max-width: 992px) {
+            .distinction-grid { grid-template-columns: 1fr; gap: 2rem; }
+        }
+
+        /* Intro & Benefits Section Styles */
+        .intro-section {
+            padding: 4rem 0 0 0; /* Padding trên, bỏ padding dưới vì nối liền với section sau */
+            background-color: var(--bg-light);
+        }
+        .concept-box {
+            background: var(--white);
+            padding: 3rem;
+            border-radius: 12px;
+            border-left: 8px solid var(--brand-teal);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+            margin-bottom: 4rem;
+        }
+        .concept-box h2 {
+            font-size: 2.2rem;
+            color: var(--brand-navy);
+            margin-top: 0;
+            margin-bottom: 1.2rem;
+            font-weight: 800;
+        }
+        .concept-box p {
+            font-size: 1.25rem;
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+        }
+        
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
+            margin-top: 2rem;
+        }
+        .benefit-card {
+            background: var(--white);
+            padding: 2.5rem;
+            border-radius: 12px;
+            border-top: 5px solid var(--brand-gold);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.03);
+            transition: transform 0.3s ease;
+        }
+        .benefit-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(214, 158, 46, 0.1);
+        }
+        .benefit-card:nth-child(2) { border-top-color: var(--brand-cyan); }
+        .benefit-card:nth-child(2):hover { box-shadow: 0 15px 30px rgba(91, 228, 197, 0.1); }
+        .benefit-card:nth-child(3) { border-top-color: var(--brand-navy); }
+        .benefit-card:nth-child(3):hover { box-shadow: 0 15px 30px rgba(43, 68, 97, 0.1); }
+        
+        .benefit-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            display: inline-block;
+        }
+        .benefit-card:nth-child(1) .benefit-icon { color: var(--brand-gold); }
+        .benefit-card:nth-child(2) .benefit-icon { color: var(--brand-cyan); }
+        .benefit-card:nth-child(3) .benefit-icon { color: var(--brand-navy); }
+
+        .benefit-card h4 {
+            font-size: 1.5rem;
+            color: var(--brand-navy);
+            margin-top: 0;
+            margin-bottom: 1rem;
+            font-weight: 800;
+        }
+        .benefit-card p {
+            font-size: 1.15rem;
+            color: var(--text-dark);
+            margin: 0;
+        }
+
+        /* Section Titles */
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-header h2 {
+            color: var(--brand-navy);
+            font-size: 2.6rem; /* Tăng kích thước tiêu đề section */
+            font-weight: 800;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-header h2::after {
+            content: '';
+            position: absolute;
+            width: 60%;
+            height: 4px;
+            background-color: var(--brand-gold);
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+
+        /* Grid for 6 Levels */
+        .tc-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr)); /* Mở rộng thẻ card để chứa chữ to */
+            gap: 2.5rem;
+        }
+
+        /* Card Design */
+        .tc-card {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 2.5rem; /* Tăng không gian (padding) bên trong card */
+            box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .tc-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(43, 68, 97, 0.1);
+        }
+
+        /* Thẻ màu trang trí góc trên */
+        .tc-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+        }
+
+        /* Map colors from logo to cards */
+        .tc-card:nth-child(1)::before { background-color: var(--brand-cyan); }
+        .tc-card:nth-child(2)::before { background-color: var(--brand-teal); }
+        .tc-card:nth-child(3)::before { background-color: var(--brand-navy); }
+        .tc-card:nth-child(4)::before { background-color: var(--brand-gold); }
+        .tc-card:nth-child(5)::before { background-color: var(--brand-navy); }
+        .tc-card:nth-child(6)::before { background: linear-gradient(90deg, var(--brand-teal), var(--brand-gold)); }
+
+        .icon-box {
+            width: 60px;
+            height: 60px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Map icon colors */
+        .tc-card:nth-child(1) .icon-box { background-color: rgba(91, 228, 197, 0.15); color: #39b89b; }
+        .tc-card:nth-child(2) .icon-box { background-color: rgba(73, 138, 148, 0.15); color: var(--brand-teal); }
+        .tc-card:nth-child(3) .icon-box { background-color: rgba(43, 68, 97, 0.1); color: var(--brand-navy); }
+        .tc-card:nth-child(4) .icon-box { background-color: rgba(214, 158, 46, 0.15); color: var(--brand-gold); }
+        .tc-card:nth-child(5) .icon-box { background-color: rgba(43, 68, 97, 0.1); color: var(--brand-navy); }
+        .tc-card:nth-child(6) .icon-box { background-color: rgba(73, 138, 148, 0.15); color: var(--brand-teal); }
+
+        .tc-card h3 {
+            color: var(--brand-navy);
+            font-size: 1.5rem; /* Tăng kích thước H3 trong card */
+            margin-top: 0;
+            margin-bottom: 1.2rem;
+            font-weight: 800;
+        }
+
+        .tc-card p {
+            color: var(--text-dark); /* Đổi sang text-dark thay vì text-gray để nét hơn */
+            font-size: 1.15rem; /* Tăng cỡ chữ đoạn văn */
+            margin: 0;
+            font-weight: 500;
+        }
+        
+        .tc-card ul {
+            margin-top: 15px;
+            padding-left: 1.5rem;
+        }
+        
+        .tc-card ul li {
+            margin-bottom: 10px; /* Tạo khoảng cách giữa các gạch đầu dòng */
+            color: var(--text-gray);
+            font-size: 1.05rem;
+        }
+
+        .level-badge {
+            position: absolute;
+            top: 1.5rem;
+            right: 2rem;
+            font-size: 4.5rem; /* Phóng to số Level làm hình nền (watermark) */
+            font-weight: 800;
+            color: rgba(0,0,0,0.04);
+            line-height: 1;
+        }
+
+        /* Banner CTA (Handover) */
+        .cta-box {
+            background: var(--brand-navy);
+            border-radius: 12px;
+            padding: 3rem;
+            margin-top: 4rem;
+            color: var(--white);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        .cta-content {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .cta-content h3 {
+            color: var(--brand-gold);
+            font-size: 2.2rem; /* Phóng to tiêu đề CTA */
+            margin-top: 0;
+            font-weight: 800;
+        }
+
+        .cta-content p {
+            font-size: 1.25rem !important; /* Cỡ chữ to cho mô tả bàn giao */
+            line-height: 1.8;
+            font-weight: 500;
+        }
+
+        .cta-icon {
+            font-size: 10rem; /* Tăng size icon */
+            color: rgba(255,255,255,0.05);
+        }
+
+        footer {
+            background-color: #1a2a3d;
+            color: #8c9fb1;
+            text-align: center;
+            padding: 2rem;
+            font-size: 0.9rem;
+        }
+
+        footer strong {
+            color: var(--white);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2rem; }
+            .cta-box { flex-direction: column; text-align: center; }
+            .cta-icon { display: none; }
+        }
+
+        /* Thêm CSS cho hình ảnh hiển thị đẹp mắt */
+        .content-image {
+            width: 100%;
+            max-width: 850px;
+            height: auto;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+            margin: 30px auto 10px auto;
+            display: block;
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+
+        /* Thêm CSS cho Footer mới */
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 3rem;
+            padding-bottom: 2.5rem;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            margin-bottom: 2rem;
+            text-align: left;
+        }
+        .footer-brand {
+            flex: 1;
+            min-width: 300px;
+        }
+        .footer-brand h3 {
+            color: var(--white);
+            font-size: 1.8rem;
+            margin-top: 0;
+            margin-bottom: 10px;
+            font-weight: 800;
+        }
+        .footer-brand p {
+            color: #8c9fb1;
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+        .footer-services {
+            flex: 1.5;
+            min-width: 300px;
+        }
+        .footer-services h4 {
+            color: var(--brand-gold);
+            font-size: 1.2rem;
+            margin-top: 0;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 800;
+        }
+        .services-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+        }
+        .services-list li {
+            color: #d1e0ed;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 500;
+        }
+        .services-list li i {
+            color: var(--brand-cyan);
+            font-size: 1.3rem;
+            width: 25px;
+            text-align: center;
+        }
+        .footer-bottom {
+            text-align: center;
+            color: #8c9fb1;
+            font-size: 0.95rem;
+        }
+
+        /* Timeline cho Ví dụ thực tế */
+        .example-section {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 3rem;
+            margin-top: 4rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+        .example-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        .example-header h3 {
+            color: var(--brand-navy);
+            font-size: 2.5rem; /* Phóng to tiêu đề ví dụ */
+            margin-bottom: 0.5rem;
+            font-weight: 800;
+        }
+        .example-header p {
+            font-size: 1.25rem;
+        }
+        .timeline {
+            position: relative;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 1rem 0;
+        }
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 4px;
+            background-color: rgba(73, 138, 148, 0.2);
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -2px;
+            border-radius: 2px;
+        }
+        .timeline-item {
+            padding: 10px 40px;
+            position: relative;
+            background-color: inherit;
+            width: 50%;
+            box-sizing: border-box;
+        }
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            right: -12px;
+            background-color: var(--white);
+            border: 4px solid var(--brand-gold);
+            top: 15px;
+            border-radius: 50%;
+            z-index: 1;
+        }
+        .left { left: 0; }
+        .right { left: 50%; }
+        .right::after { left: -12px; }
+        .timeline-content {
+            padding: 2rem; /* Tăng không gian bên trong timeline */
+            background-color: var(--bg-light);
+            position: relative;
+            border-radius: 8px;
+            border-left: 5px solid var(--brand-navy); /* Làm dày viền */
+            transition: transform 0.3s ease;
+        }
+        .timeline-content:hover {
+            transform: scale(1.02);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        .timeline-content h4 {
+            margin-top: 0;
+            color: var(--brand-navy);
+            font-size: 1.5rem; /* Phóng to tên bước timeline */
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-weight: 800;
+        }
+        .timeline-content p {
+            margin-bottom: 0;
+            font-size: 1.15rem; /* Phóng to nội dung timeline */
+            color: var(--text-dark); /* Dùng màu tối để tăng độ sắc nét */
+            line-height: 1.7;
+        }
+        @media (max-width: 768px) {
+            .timeline::after { left: 31px; }
+            .timeline-item { width: 100%; padding-left: 70px; padding-right: 25px; }
+            .timeline-item::after { left: 19px; }
+            .right { left: 0%; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header / Branding với CSS Logo -->
+    <div class="top-bar">
+        <div class="logo-container">
+            <div class="css-logo">
+                <div class="css-logo-bar bar-1"></div>
+                <div class="css-logo-bar bar-2"></div>
+                <div class="css-logo-bar bar-3"></div>
+                <div class="css-logo-bar bar-4"></div>
+                <div class="css-logo-bar bar-5"></div>
+            </div>
+            <div class="brand-text">
+                <h1>NAM HOÀNG CONTROLS</h1>
+                <p>EST. 15 YEARS IN BMS & T&C</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <header class="hero">
+        <h1>Quy Trình T&C Dự Án Cơ Điện<br><span>6 Cấp Độ Chuẩn Quốc Tế</span></h1>
+        <p>Tài liệu đào tạo chuyên sâu về Testing & Commissioning hệ thống MEP, HVAC và BMS. Nền tảng đảm bảo vận hành an toàn và tối ưu năng lượng cho Data Center & Tòa nhà thông minh.</p>
+    </header>
+
+    <!-- Khái niệm, Tầm quan trọng & Lợi ích -->
+    <section class="intro-section">
+        <div class="container" style="padding-bottom: 2rem;">
+            
+            <!-- Khái niệm -->
+            <div class="concept-box">
+                <h2>Quy trình T&C cho dự án là gì?</h2>
+                <p>Trong hệ thống Cơ điện (MEP) và Tự động hóa tòa nhà (BMS), <strong>quy trình T&C cho dự án</strong> (Testing and Commissioning) không đơn thuần là việc cấp nguồn và bật công tắc cho thiết bị chạy. Đây là một quy trình kiểm soát kỹ thuật nghiêm ngặt, trải dài từ giai đoạn thiết kế trên bản vẽ cho đến khi bàn giao thực tế.</p>
+                <p>Nhiệm vụ cốt lõi của T&C là xác minh, chứng minh và ghi chép lại toàn bộ hiệu suất của hệ thống, đảm bảo chúng tương tác liên động với nhau chính xác theo Kịch bản vận hành (SOO) và đáp ứng tuyệt đối yêu cầu khắt khe của Chủ đầu tư.</p>
+                
+                <img src="images/1.png" alt="Hình ảnh minh họa quy trình T&C" class="content-image">
+            </div>
+
+            <!-- Tầm quan trọng & Lợi ích -->
+            <div class="section-header" style="margin-bottom: 2rem;">
+                <h2>Tầm Quan Trọng & Lợi Ích Cốt Lõi</h2>
+                <p style="color: var(--text-gray); margin-top: 15px; font-size: 1.2rem;">Vì sao quy trình này quyết định 90% tuổi thọ của hệ thống cơ điện?</p>
+            </div>
+            
+            <div class="benefits-grid">
+                <!-- Lợi ích 1 -->
+                <div class="benefit-card">
+                    <i class="fa-solid fa-shield-halved benefit-icon"></i>
+                    <h4>Chốt Chặn An Toàn Tuyệt Đối</h4>
+                    <p>Khoảng 30% lỗi tiềm ẩn của hệ thống (như đứt cáp ngầm, sai logic BMS, hụt áp lực ống) chỉ xuất hiện trong giai đoạn chạy thử liên động. T&C phát hiện và triệt tiêu các rủi ro này trước khi tòa nhà đi vào vận hành, đặc biệt sống còn với các hạ tầng như Data Center.</p>
+                </div>
+                
+                <!-- Lợi ích 2 -->
+                <div class="benefit-card">
+                    <i class="fa-solid fa-leaf benefit-icon"></i>
+                    <h4>Tối Ưu Hiệu Suất & Năng Lượng</h4>
+                    <p>Quy trình T&C chuẩn giúp hiệu chuẩn (calib) cảm biến và vòng lặp PID chính xác nhất. Khi thiết bị chạy đúng điểm hiệu suất (Sweet spot), chủ đầu tư sẽ tiết kiệm được hàng tỷ đồng chi phí điện năng (O&M) và đạt chỉ số PUE tối ưu mỗi năm.</p>
+                </div>
+                
+                <!-- Lợi ích 3 -->
+                <div class="benefit-card">
+                    <i class="fa-solid fa-file-signature benefit-icon"></i>
+                    <h4>Bàn Giao Trơn Tru, Uy Tín</h4>
+                    <p>Cung cấp "bản đồ sức khỏe" của dự án thông qua hồ sơ O&M hoàn chỉnh. Đào tạo BMS bài bản giúp đội ngũ vận hành làm chủ công nghệ, hạn chế hỏng hóc do thao tác sai, qua đó bảo vệ uy tín thương hiệu của nhà thầu Cơ điện trong mắt CĐT.</p>
+                </div>
+            </div>
+            
+        </div>
+    </section>
+
+    <!-- Phần phân biệt Testing vs Commissioning -->
+    <section class="distinction-section">
+        <div class="container" style="padding-top: 0; padding-bottom: 0;">
+            <div class="section-header" style="margin-bottom: 2rem;">
+                <h2>Phân Biệt Testing & Commissioning</h2>
+                <p style="color: var(--text-gray); margin-top: 15px; font-size: 1.2rem;">Hiểu đúng bản chất để tránh nhầm lẫn trong quá trình triển khai dự án</p>
+            </div>
+            <div class="distinction-grid">
+                <!-- Testing Card -->
+                <div class="distinction-card testing-card">
+                    <div class="distinction-header-box">
+                        <i class="fa-solid fa-screwdriver-wrench distinction-icon testing-icon"></i>
+                        <h3>Testing (Kiểm Tra)</h3>
+                    </div>
+                    <p><strong>Tập trung vào THIẾT BỊ đơn lẻ.</strong> Là quá trình đo đạc, kiểm tra tĩnh và động để xác nhận từng thiết bị hoạt động đúng thông số kỹ thuật của nhà sản xuất.</p>
+                    <ul>
+                        <li><strong>Bản chất:</strong> Kiểm tra chức năng cơ bản (Bật/Tắt, chạy/dừng), là điều kiện cần.</li>
+                        <li><strong>Phạm vi:</strong> Cục bộ, từng thiết bị riêng biệt (Bơm, Quạt, Tủ điện).</li>
+                        <li><strong>Ví dụ:</strong> Đo điện trở cách điện cáp, thử áp lực đường ống, chạy thử bơm bằng tay (Manual).</li>
+                        <li><strong>Mục tiêu:</strong> Đảm bảo thiết bị "sống", an toàn và sẵn sàng hoạt động.</li>
+                    </ul>
+                </div>
+                <!-- Commissioning Card -->
+                <div class="distinction-card commissioning-card">
+                    <div class="distinction-header-box">
+                        <i class="fa-solid fa-gears distinction-icon commissioning-icon"></i>
+                        <h3>Commissioning (Vận Hành & Ủy Quyền)</h3>
+                    </div>
+                    <p><strong>Tập trung vào HỆ THỐNG tổng thể.</strong> Là quá trình đảm bảo các thiết bị phối hợp nhịp nhàng theo kịch bản thiết kế (SOO) để đáp ứng yêu cầu của chủ đầu tư.</p>
+                    <ul>
+                        <li><strong>Bản chất:</strong> Kiểm tra logic điều khiển, sự liên động (Interlock) và hiệu suất, là điều kiện đủ.</li>
+                        <li><strong>Phạm vi:</strong> Toàn bộ hệ thống, tích hợp đa bộ môn (BMS, HVAC, Điện).</li>
+                        <li><strong>Ví dụ:</strong> Kiểm tra kịch bản tự động: Khi nhiệt độ phòng tăng -> Van nước lạnh mở -> Biến tần bơm tăng tốc.</li>
+                        <li><strong>Mục tiêu:</strong> Đảm bảo hệ thống vận hành tối ưu, tiết kiệm năng lượng và ổn định.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content: 6 Levels -->
+    <div class="container">
+        
+        <div class="section-header">
+            <h2>Giải Mã 6 Cấp Độ Commissioning</h2>
+            <p style="color: var(--text-gray); margin-top: 15px;">Quy trình cốt lõi quyết định 90% tuổi thọ và độ ổn định của hệ thống cơ điện</p>
+        </div>
+
+        <div class="tc-grid">
+            
+            <!-- Level 0 -->
+            <div class="tc-card">
+                <span class="level-badge">0</span>
+                <div class="icon-box">
+                    <i class="fa-solid fa-compass-drafting"></i>
+                </div>
+                <h3>Level 0: Programme & Design</h3>
+                <p><strong>Khởi tạo & Thẩm định thiết kế:</strong> Xây dựng "Commissioning Plan" ngay từ khi dự án còn trên giấy.</p>
+                <ul>
+                    <li>Rà soát bản vẽ P&ID, đảm bảo tính <em>"Testable"</em> (đủ không gian lắp cảm biến, van đo lường).</li>
+                    <li>Phát triển ma trận logic điều khiển (Control Logic Matrix).</li>
+                    <li>Lên phương án tải giả (Loadbank) đặc thù cho Data Center.</li>
+                </ul>
+            </div>
+
+            <!-- Level 1 -->
+            <div class="tc-card">
+                <span class="level-badge">1</span>
+                <div class="icon-box">
+                    <i class="fa-solid fa-industry"></i>
+                </div>
+                <h3>Level 1: FAT (Factory Test)</h3>
+                <p><strong>Kiểm soát chất lượng tại nguồn:</strong> Đánh giá thiết bị cốt lõi trực tiếp tại nhà máy của hãng trước khi xuất xưởng.</p>
+                <ul>
+                    <li>Ép tải 100% để đối chiếu hiệu suất với Datasheet đã duyệt.</li>
+                    <li>Đo đạc dòng điện, độ rung, độ ồn và test các lỗi cơ bản.</li>
+                    <li>Triệt tiêu rủi ro mang "thiết bị lỗi" về công trình.</li>
+                </ul>
+            </div>
+
+            <!-- Level 2 -->
+            <div class="tc-card">
+                <span class="level-badge">2</span>
+                <div class="icon-box">
+                    <i class="fa-solid fa-clipboard-check"></i>
+                </div>
+                <h3>Level 2: QA/QC Installation</h3>
+                <p><strong>Kiểm tra tĩnh tại hiện trường:</strong> Giai đoạn hệ thống đã lắp đặt xong nhưng <em>chưa cấp nguồn điện</em>.</p>
+                <ul>
+                    <li>Đo điện trở cách điện (Megger test) cho cáp động lực.</li>
+                    <li>Thử áp lực (Pressure test) đường ống nước, ống gas.</li>
+                    <li>Kiểm tra thông mạch (Point-to-point) các tín hiệu I/O nối về tủ DDC của BMS.</li>
+                </ul>
+            </div>
+
+            <!-- Level 3 -->
+            <div class="tc-card">
+                <span class="level-badge">3</span>
+                <div class="icon-box">
+                    <i class="fa-solid fa-power-off"></i>
+                </div>
+                <h3>Level 3: Start-Up (SAT)</h3>
+                <p><strong>Khởi động thiết bị đơn lẻ:</strong> Chính thức "Power-on". Cấp điện và chạy độc lập từng thiết bị.</p>
+                <ul>
+                    <li>Bơm, quạt, máy nén được kích hoạt tay (Manual).</li>
+                    <li>Xác nhận chiều quay motor, dòng khởi động chuẩn.</li>
+                    <li>Calib (hiệu chuẩn) cảm biến để giá trị trên màn hình khớp với thực tế.</li>
+                </ul>
+            </div>
+
+            <!-- Level 4 -->
+            <div class="tc-card">
+                <span class="level-badge">4</span>
+                <div class="icon-box">
+                    <i class="fa-solid fa-microchip"></i>
+                </div>
+                <h3>Level 4: Functional Testing</h3>
+                <p><strong>Kiểm tra logic vận hành (FPT):</strong> Chạy thử tự động (Auto). Lúc này BMS đóng vai trò nhạc trưởng.</p>
+                <ul>
+                    <li>Mô phỏng điều kiện môi trường để test kịch bản điều khiển (SOO).</li>
+                    <li>Test vòng lặp PID: Nhiệt độ phòng tăng -> Van nước lạnh tự động mở bao nhiêu %?</li>
+                    <li>Kiểm tra hệ thống Cảnh báo (Alarms) gửi về phần mềm giám sát.</li>
+                </ul>
+            </div>
+
+            <!-- Level 5 -->
+            <div class="tc-card">
+                <span class="level-badge">5</span>
+                <div class="icon-box">
+                    <i class="fa-solid fa-server"></i>
+                </div>
+                <h3>Level 5: Integrated Systems</h3>
+                <p><strong>Kiểm tra liên động toàn diện (IST):</strong> Thử thách khắt khe nhất, mô phỏng sự cố cực đoan nhất.</p>
+                <ul>
+                    <li><strong>Blackout Test:</strong> Giả lập mất điện lưới. Máy phát điện, UPS, ATS phải tự động chuyển nguồn không làm sập server.</li>
+                    <li><strong>Fire Alarm:</strong> Kích hoạt báo cháy -> BMS dừng quạt cấp gió, bật quạt hút khói.</li>
+                </ul>
+            </div>
+
+        </div>
+
+        <!-- Ví dụ thực tế Section -->
+        <div class="example-section">
+            <div class="example-header">
+                <h3>Case Study Thực Tế</h3>
+                <p style="color: var(--text-gray);">Ví dụ chuỗi 6 cấp độ T&C cho Hệ thống Chiller Trung tâm tại Data Center</p>
+                
+                <img src="images/1.png" alt="Sơ đồ Hệ thống Chiller 3D" class="content-image">
+            </div>
+            
+            <div class="timeline">
+                <div class="timeline-item left">
+                    <div class="timeline-content">
+                        <h4><span class="level-badge" style="position:static; font-size: 1.5rem; color: var(--brand-gold); margin-right: 5px;">L0</span> Thiết kế</h4>
+                        <p>Kỹ sư CxA rà soát bản vẽ đường ống, yêu cầu lắp thêm các van Bypass và cảm biến chênh áp (DP) ở vị trí xa nhất để BMS có thể lấy tín hiệu điều khiển biến tần bơm sau này.</p>
+                    </div>
+                </div>
+                <div class="timeline-item right">
+                    <div class="timeline-content">
+                        <h4><span class="level-badge" style="position:static; font-size: 1.5rem; color: var(--brand-gold); margin-right: 5px;">L1</span> FAT Chiller</h4>
+                        <p>Đoàn kỹ sư sang nhà máy của hãng tại nước ngoài, chứng kiến Chiller 1000 Tấn lạnh chạy ép tải ở 100%, 75%, 50%. Hiệu suất giải nhiệt COP đạt chuẩn mới cho đóng thùng chở về Việt Nam.</p>
+                    </div>
+                </div>
+                <div class="timeline-item left">
+                    <div class="timeline-content">
+                        <h4><span class="level-badge" style="position:static; font-size: 1.5rem; color: var(--brand-gold); margin-right: 5px;">L2</span> Lắp đặt (QA/QC)</h4>
+                        <p>Đường ống thép hàn xong được bơm nước ép áp lực 15 bar ngâm trong 24h không tụt áp. Kỹ sư BMS tiến hành "thông mạch", đo cáp từ cảm biến nhiệt độ dưới hầm lên tới tủ DDC không bị đứt ngầm.</p>
+                    </div>
+                </div>
+                <div class="timeline-item right">
+                    <div class="timeline-content">
+                        <h4><span class="level-badge" style="position:static; font-size: 1.5rem; color: var(--brand-gold); margin-right: 5px;">L3</span> Chạy đơn động</h4>
+                        <p>Cấp điện lưới. Nhấn nút chạy từng bơm nước sinh hàn. Thợ cơ khí đo độ rung của cánh quạt tháp giải nhiệt. Màn hình Chiller sáng đèn, đọc đúng nhiệt độ nước đang là 28°C.</p>
+                    </div>
+                </div>
+                <div class="timeline-item left">
+                    <div class="timeline-content">
+                        <h4><span class="level-badge" style="position:static; font-size: 1.5rem; color: var(--brand-gold); margin-right: 5px;">L4</span> Logic BMS</h4>
+                        <p>Kỹ sư giả lập nhiệt độ nước cấp (CHWS) tăng lên 10°C. BMS lập tức phát lệnh gọi chạy thêm Chiller số 2 và tăng tua biến tần của bơm nước. Logic vận hành mượt mà, đúng thiết kế.</p>
+                    </div>
+                </div>
+                <div class="timeline-item right">
+                    <div class="timeline-content">
+                        <h4><span class="level-badge" style="position:static; font-size: 1.5rem; color: var(--brand-gold); margin-right: 5px;">L5</span> Cúp điện giả lập</h4>
+                        <p>Kéo cầu dao tổng. Điện tắt đen. UPS giữ điện cho tủ điều khiển. 15 giây sau máy phát nổ, ATS chuyển nguồn. Hệ thống Chiller tự động "Restart" lại theo thứ tự: Bơm -> Tháp -> Chiller để Data Center không bị quá nhiệt.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Level 6 / Handover -->
+        <div class="cta-box">
+            <div class="cta-content">
+                <h3><i class="fa-solid fa-graduation-cap" style="margin-right: 15px;"></i> Level 6: Project Closeout & Handover</h3>
+                <p>Giai đoạn cuối cùng là đóng gói tài liệu O&M. Đối với hệ thống Chiller trên, chúng tôi <strong>tiến hành đào tạo BMS chuyên sâu</strong>, hướng dẫn vận hành viên cách đọc biểu đồ Trendlog để duy trì chỉ số PUE tối ưu nhất cho Data Center.</p>
+            </div>
+            <i class="fa-solid fa-handshake cta-icon"></i>
+        </div>
+
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-brand">
+                <h3>NAM HOÀNG CONTROLS</h3>
+                <p>Đội ngũ chuyên gia Tự động hóa Tòa nhà & Hệ thống Cơ điện Data Center với 15 năm kinh nghiệm thực chiến. Chúng tôi cam kết mang lại giải pháp vận hành tối ưu, an toàn và tiết kiệm năng lượng nhất cho dự án của bạn.</p>
+            </div>
+            <div class="footer-services">
+                <h4>Dịch Vụ Của Chúng Tôi</h4>
+                <ul class="services-list">
+                    <li><i class="fa-solid fa-chalkboard-user"></i> Đào tạo, bảo trì BMS</li>
+                    <li><i class="fa-solid fa-laptop-code"></i> Phần mềm giám sát năng lượng</li>
+                    <li><i class="fa-solid fa-user-tie"></i> Tư vấn T&C các hệ thống ME</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 Nam Hoàng Controls. EST. 15 YEARS IN BMS & T&C.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
